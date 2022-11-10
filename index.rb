@@ -1,36 +1,52 @@
-puts "Seja Bem Vindo ao nosso banco"
-puts "_____________________________"
-puts ""
+require "./class/account.rb"
 
-puts "Digite seu primeiro nome"
-nome = gets.chomp
-puts "----------------"
+option = nil
+accounts = []
+account_number = 0
+puts "Seja bem vindo!"
 
-class Conta
-	attr_reader :usuario, :numero_da_conta, :saldo
+while option != 0 do
+	puts "_____________________________"
+	puts "Escolha uma das opções abaixo"
+	puts 
+	puts "1- Criar Nova conta "
+	puts "2- Acessar contas criadas"
+	puts "0- Sair"
+	option = gets.chomp.to_i
 
-	def initialize(nome, numero, valor)
-		@usuario = nome
-		@numero_da_conta = numero
-		@saldo = valor
+	if option == 1    
+		puts "_____________________________"
+		puts "Digite seu nome"
+		name = gets.chomp
+		puts "----------------"
+
+		def greeting(name) 
+			puts "Olá #{name}."
+			puts 
+			puts "Algumas informações sobre sua conta:"
+			puts
+		end
+
+		account_number += 0.001
+		account = Account.new(name, account_number, 0.0)
+		accounts << account
+		greeting(name)
+
+		account.information
+
+	elsif option == 0
+		puts "Até breve!"
+
+  elsif option == 2
+  	puts "Contas criadas:"
+  	puts "#{accounts} "
+  	puts "----------------------------"
+  	puts 
+
+	else 
+		puts "Opção inválida!"
+		puts "Tente novamente."
+		puts
 	end
 
-
-	def informacoes
-		puts "Olá #{@usuario}"
-		puts ""
-		puts "Algumas informações sobre sua conta:"
-		puts "-------------------"
-		puts "Numero da conta é:"
-		puts "#{@numero_da_conta}"
-		puts "-------------------"
-		puts "Saldo disponível é: #{@saldo}" 
-	end
 end
-
-
-
-
-conta = Conta.new(nome, "0001", 0.0)
-
-conta.informacoes
