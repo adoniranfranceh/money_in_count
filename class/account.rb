@@ -1,5 +1,5 @@
 class Account
-	attr_reader :name, :balance, :number, :last_value_add
+	attr_reader :name, :balance, :number
 
 
 	def initialize(name, number, balance)
@@ -9,10 +9,10 @@ class Account
 		
 	end
 	
-	def sum(value)
-		@last_value_add = value
+	def deposit(value)
+		
 
-		@balance = @balance + @last_value_add
+		@balance = @balance + value
 	end
 
   

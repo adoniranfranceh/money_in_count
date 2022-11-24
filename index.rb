@@ -28,7 +28,7 @@ while option != 0 do
 
 		system'clear'
 		if accounts.any?
-	 		number += 1
+	 		number = accounts.last.number + 1
 		end
 
 		def greeting(name) 
@@ -49,43 +49,38 @@ while option != 0 do
   elsif option == 2
   	system'clear'
 
-  	puts "#{accounts}"
-  	
   	accounts.each do |account|
-  		puts "-----------------------"
-  		puts "Nome: "
-  		puts account.name
-  	  puts
-  		puts "Conta:" 
-  		puts account.number
-  		puts 
-
+  		puts "**********************************"
+  		account.information
   	end
+
+  	
   		
   elsif option == 3
+  	puts "Digite o número da conta que deseja efetuar o deposito"
+		choice = gets.chomp.to_i
+		puts "------------------------------------------------------"
+		puts "Digite o valor que deseja enviar"
+		value = gets.chomp.to_i
 
-  	accounts.each do |deposit|
+	  system'clear'
+
+
+  	accounts.each do |account|
     	
-    	puts "Digite o número da conta que deseja efetuar o deposito"
-			choice = gets.chomp.to_i
-			puts "------------------------------------------------------"
-			puts "Digite o valor que deseja enviar"
-			value = gets.chomp.to_i
+    	
 
-		  system'clear'
-
-
-    	if choice == deposit.number
+    	if choice == account.number
     		
-    		deposit.sum(value)
+    		account.deposit(value)
     		
     		
 				puts "Valor adicionado: $#{value}"
 				puts 
 				puts 
 				puts "Valor total:" 
-				puts "$#{deposit.balance}"
-				break
+				puts "$#{account.balance}"
+				
 
 			else
 
