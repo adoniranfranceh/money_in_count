@@ -15,10 +15,11 @@ while option != 0 do
 	puts "1- Criar Nova conta "
 	puts "2- Mostrar contas criadas"
 	puts "3- Adicionar valor em conta"
+	puts "4- Transferir valor para conta destino"
 	puts "0- Sair"
 	option = gets.chomp.to_i
 
-	
+	system'clear'
 
 	if option == 1    
 		puts "_____________________________"
@@ -67,14 +68,8 @@ while option != 0 do
 
 
   	accounts.each do |account|
-    	
-    	
-
     	if choice == account.number
-    		
     		account.deposit(value)
-    		
-    		
 				puts "Valor adicionado: $#{value}"
 				puts 
 				puts 
@@ -82,14 +77,39 @@ while option != 0 do
 				puts "$#{account.balance}"
 				
 
-			else
-
-				puts "conta inválida"
 			end
   	end
 
+  elsif option == 4
 
-  
+  	puts "Digite o número da conta destino"
+  	recipient = gets.chomp.to_i
+  	puts
+  	puts "Digite o valor que deseja enviar"
+  	value = gets.chomp.to_i
+  	puts
+  	puts "Digite o número da conta remetente"
+  	sender = gets.chomp.to_i
+  	
+
+  	if account.balance > value
+  	
+	  	accounts.each do |account|
+	  		if sender == account.number
+	  			account.withdraw(value)
+				end
+			end
+				
+	  	accounts.each do |account|	
+				if recipient == account.number
+	  			account.deposit(value)
+	  			puts "Valor adicionado: $#{value}"
+					puts 
+				end
+	  	end
+	  else
+	  	puts "VALOR INDISPONÍVEL!"
+	  end
 
   elsif option == 0
   	system'clear'

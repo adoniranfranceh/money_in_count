@@ -10,9 +10,12 @@ class Account
 	end
 	
 	def deposit(value)
-		
-
 		@balance = @balance + value
+	end
+
+	def withdraw(value)
+		@balance = @balance - value
+		
 	end
 
   
