@@ -69,7 +69,7 @@ while option != 0 do
 
   	accounts.each do |account|
     	if choice == account.number
-    		account.deposit(value)
+				account.deposit(value)
 				puts "Valor adicionado: $#{value}"
 				puts 
 				puts 
@@ -90,26 +90,22 @@ while option != 0 do
   	puts
   	puts "Digite o número da conta remetente"
   	sender = gets.chomp.to_i
-  	
+  	system'clear'
 
-  	if account.balance > value
-  	
 	  	accounts.each do |account|
 	  		if sender == account.number
-	  			account.withdraw(value)
-				end
-			end
-				
-	  	accounts.each do |account|	
-				if recipient == account.number
-	  			account.deposit(value)
+	  			if value > account.balance
+				    puts "Valor indisponível!"
+				    break
+				  end
+				  account.withdraw(value)
+
+			  elsif recipient == account.number
+					account.deposit(value)
 	  			puts "Valor adicionado: $#{value}"
 					puts 
 				end
-	  	end
-	  else
-	  	puts "VALOR INDISPONÍVEL!"
-	  end
+			end
 
   elsif option == 0
   	system'clear'
