@@ -1,11 +1,13 @@
+ACCOUNTS = []
+
 class Account
 	attr_reader :name, :balance, :number
 
 
-	def initialize(name, number, balance)
+	def initialize(name)
 		@name = name
-		@number = number
-		@balance = balance
+		@number = generate_number
+		@balance = 0.0
 		
 	end
 	
@@ -16,6 +18,22 @@ class Account
 	def withdraw(value)
 		@balance = @balance - value
 		
+	end
+
+	def save
+		ACCOUNTS << self
+
+		self
+	end
+
+	def generate_number
+		return ACCOUNTS.last.number + 1 if ACCOUNTS.any?
+
+		1
+	end
+
+	def self.all 
+		ACCOUNTS
 	end
 
   
