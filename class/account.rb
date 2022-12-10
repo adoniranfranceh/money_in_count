@@ -3,7 +3,6 @@ ACCOUNTS = []
 class Account
 	attr_reader :name, :balance, :number
 
-
 	def initialize(name)
 		@name = name
 		@number = generate_number
@@ -36,7 +35,6 @@ class Account
 		ACCOUNTS
 	end
 
-  
 	def information
 		puts "-------------------"
 		puts "Nome: #{@name}"
@@ -48,7 +46,3 @@ class Account
 		
 	end
 end
-
-
-
-

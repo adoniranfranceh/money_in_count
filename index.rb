@@ -5,8 +5,7 @@ puts "Seja bem vindo!"
 
 while option != 0 do
   puts "_____________________________"
-  puts "Escolha uma das opções abaixo"
-  puts 
+  puts "Escolha uma das opções abaixo \n"
   puts "1- Criar Nova conta "
   puts "2- Mostrar contas criadas"
   puts "3- Adicionar valor em conta"
@@ -44,8 +43,6 @@ while option != 0 do
       account.information
     end
 
-    
-      
   elsif option == 3
     puts "Digite o número da conta que deseja efetuar o deposito"
     choice = gets.chomp.to_i
@@ -55,46 +52,48 @@ while option != 0 do
 
     system'clear'
 
+    accounts = Account.all
 
     accounts.each do |account|
       if choice == account.number
         account.deposit(value)
-        puts "Valor adicionado: $#{value}"
-        puts 
-        puts 
+        puts "Valor adicionado: $#{value} \n\n"
         puts "Valor total:" 
         puts "$#{account.balance}"
-        
-
       end
     end
 
   elsif option == 4
 
-    puts "Digite o número da conta destino"
+    puts "Digite o número da conta destino\n"
     recipient = gets.chomp.to_i
-    puts
-    puts "Digite o valor que deseja enviar"
+    puts "Digite o valor que deseja enviar\n"
     value = gets.chomp.to_i
-    puts
     puts "Digite o número da conta remetente"
     sender = gets.chomp.to_i
     system'clear'
 
-      accounts.each do |account|
-        if sender == account.number
-          if value > account.balance
-            puts "Valor indisponível!"
-            break
-          end
-          account.withdraw(value)
+    accounts = Account.all 
 
-        elsif recipient == account.number
-          account.deposit(value)
-          puts "Valor adicionado: $#{value}"
-          puts 
-        end
+    account_sender = nil
+    account_recipient = nil
+
+    accounts.each do |account|
+      if account.number == sender 
+        account_sender = account
+      elsif account.number == recipient
+        account_recipient = account
       end
+    end
+
+    if account_sender.balance >= value 
+      account_sender.withdraw(value)
+      account_recipient.deposit(value)
+      puts "Valor adicionado "
+      puts "$#{account.balance}"
+    else 
+      puts "Valor indisponível"
+    end
 
   elsif option == 0
     system'clear'
@@ -102,10 +101,6 @@ while option != 0 do
 
   else 
     puts "Opção inválida!"
-    puts "Tente novamente."
-    puts
-  end
-  
-
+    puts "Tente novamente.\n"
+  end 
 end
-
