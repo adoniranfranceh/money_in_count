@@ -1,16 +1,19 @@
 require "./class/account.rb"
+require "./class/cambio.rb"
 
 option = nil
 puts "Seja bem vindo!"
 
 while option != 0 do
-  puts "_____________________________"
-  puts "Escolha uma das opções abaixo \n"
-  puts "1- Criar Nova conta "
-  puts "2- Mostrar contas criadas"
-  puts "3- Adicionar valor em conta"
-  puts "4- Transferir valor para conta destino"
-  puts "0- Sair"
+  puts '->->->->->->->-> M E N U ->->->->->->->->'
+  puts "| 1 | Criar Nova conta                   |"
+  puts "| 2 | Mostrar contas criadas             |"
+  puts "| 3 | Adicionar valor em conta           |"
+  puts "| 4 | Transferir valor para conta destino|"
+  puts "| 5 | Conversor de moeda(rápido)         |"
+  puts "| 0 | Sair                               |"
+  puts '------------------------------------------'
+  puts '> INFORME A SUA OPÇÃO -------:'
   option = gets.chomp.to_i
 
   system'clear'
@@ -95,6 +98,12 @@ while option != 0 do
       puts "Valor indisponível"
     end
 
+  elsif option == 5
+
+    cambio = Cambio.new
+
+    cambio.selected_action
+    
   elsif option == 0
     system'clear'
     puts "Até breve!"
