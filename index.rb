@@ -4,7 +4,7 @@ require "./class/cambio.rb"
 option = nil
 puts "Seja bem vindo!"
 
-while option != 0 do
+while option != 0 do   
   puts '->->->->->->->-> M E N U ->->->->->->->->'
   puts "| 1 | Criar Nova conta                   |"
   puts "| 2 | Mostrar contas criadas             |"
@@ -22,7 +22,6 @@ while option != 0 do
     puts "_____________________________"
     puts "Digite seu nome"
     name = gets.chomp
-    puts "----------------"
 
     system'clear'
 
@@ -55,17 +54,13 @@ while option != 0 do
 
     system'clear'
 
-    accounts = Account.all
+    account = Account.find_by_number(choice) 
 
-    accounts.each do |account|
-      if choice == account.number
-        account.deposit(value)
-        puts "Valor adicionado: $#{value} \n\n"
-        puts "Valor total:" 
-        puts "$#{account.balance}"
-      end
-    end
-
+    account.deposit(value) if account
+    puts "Valor adicionado: $#{value} \n\n"
+    puts "Valor total:" 
+    puts "$#{account.balance}"
+      
   elsif option == 4
 
     puts "Digite o número da conta destino\n"
@@ -78,25 +73,10 @@ while option != 0 do
 
     accounts = Account.all 
 
-    account_sender = nil
-    account_recipient = nil
+    account_sender = Account.find_by_number(sender)
+    account_recipient = Account.find_by_number(recipient)
 
-    accounts.each do |account|
-      if account.number == sender 
-        account_sender = account
-      elsif account.number == recipient
-        account_recipient = account
-      end
-    end
-
-    if account_sender.balance >= value 
-      account_sender.withdraw(value)
-      account_recipient.deposit(value)
-      puts "Valor adicionado "
-      puts "$#{account.balance}"
-    else 
-      puts "Valor indisponível"
-    end
+    account_sender.transfer_value_for(account_recipient, value)
 
   elsif option == 5
 
